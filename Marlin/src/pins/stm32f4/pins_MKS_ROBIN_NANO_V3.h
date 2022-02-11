@@ -21,9 +21,10 @@
  */
 #pragma once
 
-#if NOT_TARGET(STM32F4, STM32F4xx)
-  #error "Oops! Select an STM32F4 board in 'Tools > Board.'"
-#elif HOTENDS > 2 || E_STEPPERS > 2
+#define ALLOW_STM32DUINO
+#include "env_validate.h"
+
+#if HOTENDS > 2 || E_STEPPERS > 2
   #error "MKS Robin Nano V3 supports up to 2 hotends / E-steppers."
 #elif HAS_FSMC_TFT
   #error "MKS Robin Nano V3 doesn't support FSMC-based TFT displays."
@@ -31,80 +32,22 @@
 
 #define BOARD_INFO_NAME "Kywoo3D"
 
-// USB Flash Drive support
-#define HAS_OTG_USB_HOST_SUPPORT
-
-// Avoid conflict with TIMER_TONE
-#define STEP_TIMER                            10
-
-// Use one of these or SDCard-based Emulation will be used
-//#define SRAM_EEPROM_EMULATION                   // Use BackSRAM-based EEPROM emulation
-//#define FLASH_EEPROM_EMULATION                  // Use Flash-based EEPROM emulation
-#define I2C_EEPROM
-#define MARLIN_EEPROM_SIZE                0x1000  // 4KB
-
-#define I2C_SCL_PIN                       PB6 
-#define I2C_SDA_PIN                       PB7
-
-//
-// Release PB4 (Z_DIR_PIN) from JTAG NRST role
-//
-//#define DISABLE_DEBUG
-
-//
-// Servos
-//
-#define SERVO0_PIN                          PA8   // Enable BLTOUCH
-
-//
-// Limit Switches
-//
-#define X_DIAG_PIN                          PD15
-#define Y_DIAG_PIN                          PD2
-#define Z_DIAG_PIN                          PC8
-#define E0_DIAG_PIN                         PC4
-#define E1_DIAG_PIN                         PE7
-
-//
-#define X_STOP_PIN                          PA15
-#define Y_STOP_PIN                          PD2
-#define Z_MIN_PIN                           PC8
-#define Z_MAX_PIN                           PC4
-
-//
-// Steppers
-//
-#define X_ENABLE_PIN                        PE4
-#define X_STEP_PIN                          PE3
-#define X_DIR_PIN                           PE2
 #ifndef X_CS_PIN
   #define X_CS_PIN                          PD5
 #endif
 
-#define Y_ENABLE_PIN                        PE1
-#define Y_STEP_PIN                          PE0
-#define Y_DIR_PIN                           PB9
 #ifndef Y_CS_PIN
   #define Y_CS_PIN                          PD7
 #endif
 
-#define Z_ENABLE_PIN                        PB8
-#define Z_STEP_PIN                          PB5
-#define Z_DIR_PIN                           PB4
 #ifndef Z_CS_PIN
   #define Z_CS_PIN                          PD4
 #endif
 
-#define E0_ENABLE_PIN                       PB3
-#define E0_STEP_PIN                         PD6
-#define E0_DIR_PIN                          PD3
 #ifndef E0_CS_PIN
   #define E0_CS_PIN                         PD9
 #endif
 
-#define E1_ENABLE_PIN                       PA3
-#define E1_STEP_PIN                         PD15
-#define E1_DIR_PIN                          PA1
 #ifndef E1_CS_PIN
   #define E1_CS_PIN                         PD8
 #endif
@@ -128,6 +71,7 @@
   #endif
 #endif
 
+<<<<<<< HEAD
 #if HAS_TMC_UART
   //
   // Software serial
@@ -372,3 +316,6 @@
 
   #endif // !MKS_MINI_12864
 #endif // HAS_SPI_LCD
+=======
+#include "pins_MKS_ROBIN_NANO_V3_common.h"
+>>>>>>> origin/master
