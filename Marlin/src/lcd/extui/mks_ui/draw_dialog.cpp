@@ -132,36 +132,6 @@ static void btn_ok_event_cb(lv_obj_t *btn, lv_event_t event) {
   }
   #if ENABLED(ADVANCED_PAUSE_FEATURE)
     else if (DIALOG_IS(PAUSE_MESSAGE_WAITING, PAUSE_MESSAGE_INSERT, PAUSE_MESSAGE_HEAT))
-      wait_for_user = false;
-    else if (DIALOG_IS(PAUSE_MESSAGE_OPTION))
-      pause_menu_response = PAUSE_RESPONSE_EXTRUDE_MORE;
-    else if (DIALOG_IS(PAUSE_MESSAGE_RESUME)) {
-      clear_cur_ui();
-      draw_return_ui();
-    }
-  #endif
-  else if (DIALOG_IS(STORE_EEPROM_TIPS)) {
-    TERN_(EEPROM_SETTINGS, (void)settings.save());
-    clear_cur_ui();
-    draw_return_ui();
-  }
-  else if (DIALOG_IS(READ_EEPROM_TIPS)) {
-    TERN_(EEPROM_SETTINGS, (void)settings.load());
-    clear_cur_ui();
-    draw_return_ui();
-  }
-  else if (DIALOG_IS(REVERT_EEPROM_TIPS)) {
-    TERN_(EEPROM_SETTINGS, (void)settings.reset());
-    clear_cur_ui();
-    #if ENABLED(TOUCH_SCREEN_CALIBRATION)
-      const bool do_draw_cal = touch_calibration.need_calibration();
-      if (do_draw_cal) {
-        disp_state_stack._disp_index--; // We are asynchronous from the dialog, so let's remove the dialog from the stack
-        lv_draw_touch_calibration_screen();
-      }
-    #else
-      constexpr bool do_draw_cal = false;
-    #endif
     if (!do_draw_cal) draw_return_ui();
   }
   else if (DIALOG_IS(WIFI_CONFIG_TIPS)) {
