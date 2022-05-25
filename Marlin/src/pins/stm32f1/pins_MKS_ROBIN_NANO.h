@@ -45,3 +45,64 @@
 //#define LED_PIN                           PB2
 
 #include "pins_MKS_ROBIN_NANO_common.h"
+
+#if HAS_TMC_UART
+
+#define X_SERIAL_TX_PIN PA10
+#define X_SERIAL_RX_PIN PA10
+
+#define Y_SERIAL_TX_PIN PA9
+#define Y_SERIAL_RX_PIN PA9
+
+#define Z_SERIAL_TX_PIN PC7
+#define Z_SERIAL_RX_PIN PC7
+
+#define E0_SERIAL_TX_PIN PC13
+#define E0_SERIAL_RX_PIN PC13
+
+// Reduce baud rate to improve software serial reliability
+#define TMC_BAUD_RATE 19200
+#endif // HAS_TMC_UART
+ //
+// Misc. Functions
+//
+
+#if HAS_TFT_LVGL_UI
+  // LVGL
+  #ifndef TOUCH_CALIBRATION_X
+    #define TOUCH_CALIBRATION_X             17880
+  #endif
+  #ifndef TOUCH_CALIBRATION_Y
+    #define TOUCH_CALIBRATION_Y            -12234
+  #endif
+  #ifndef TOUCH_OFFSET_X
+    #define TOUCH_OFFSET_X                    -45
+  #endif
+  #ifndef TOUCH_OFFSET_Y
+    #define TOUCH_OFFSET_Y                    349
+  #endif
+  #ifndef TOUCH_ORIENTATION
+    #define TOUCH_ORIENTATION    TOUCH_LANDSCAPE
+  #endif
+
+  //#define MKSPWC
+  #ifdef MKSPWC
+    #define SUICIDE_PIN                     PB2   // Enable MKSPWC SUICIDE PIN
+    #define SUICIDE_PIN_INVERTING          false  // Enable MKSPWC PIN STATE
+    #define KILL_PIN                        PA2   // Enable MKSPWC DET PIN
+    #define KILL_PIN_STATE                  true  // Enable MKSPWC PIN STATE
+  #endif
+
+  #define MT_DET_1_PIN                      PA4   // LVGL UI FILAMENT RUNOUT1 PIN
+  #define MT_DET_2_PIN                      PE6   // LVGL UI FILAMENT RUNOUT2 PIN
+  #define MT_DET_PIN_INVERTING             false  // LVGL UI filament RUNOUT PIN STATE
+
+  #define WIFI_IO0_PIN                      PC13  // MKS ESP WIFI IO0 PIN
+  #define WIFI_IO1_PIN                      PC7   // MKS ESP WIFI IO1 PIN
+  #define WIFI_RESET_PIN                    PA5   // MKS ESP WIFI RESET PIN
+#else
+  //#define POWER_LOSS_PIN                  PA2   // PW_DET
+  //#define PS_ON_PIN                       PB2   // PW_OFF
+  #define FIL_RUNOUT_PIN                    PA4
+  #define FIL_RUNOUT2_PIN                   PE6
+#endif
