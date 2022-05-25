@@ -78,7 +78,7 @@
 #include "draw_keyboard.h"
 #include "draw_media_select.h"
 #include "draw_encoder_settings.h"
-
+#include "draw_bltouch_settings.h"
 #include "../../../inc/MarlinConfigPre.h"
 
 #if ENABLED(MKS_WIFI_MODULE)
@@ -166,6 +166,10 @@
   #define PARA_UI_BACK_BTN_X_SIZE   70
   #define PARA_UI_BACK_BTN_Y_SIZE   40
 
+  #define PARA_UI_ARROW_V           12
+  #define PARA_UI_ITEM_TEXT_V       10
+  #define PARA_UI_ITEM_TEXT_H       10
+
   #define QRCODE_X                  20
   #define QRCODE_Y                  40
   #define QRCODE_WIDTH              160
@@ -182,7 +186,7 @@
 #endif
 
 extern char public_buf_m[100];
-extern char public_buf_l[30];
+extern char public_buf_l[50];
 
 typedef struct {
   uint32_t  spi_flash_flag;
@@ -224,10 +228,12 @@ typedef struct UI_Config_Struct {
           filament_loading_completed:1,
           filament_unloading_completed:1,
           filament_loading_time_flg:1,
-          filament_unloading_time_flg:1;
+          filament_unloading_time_flg:1,
+          adjustZoffset:1;
   uint8_t wifi_name[32];
   uint8_t wifi_key[64];
   uint8_t cloud_hostUrl[96];
+  uint8_t autoLeveling;
   // Extruder Steps distances (mm)
   uint8_t extruStep;
   static constexpr uint8_t eStepMin =  1,
@@ -257,7 +263,8 @@ typedef struct UI_Config_Struct {
   float current_x_position_bak,
         current_y_position_bak,
         current_z_position_bak,
-        current_e_position_bak;
+        current_e_position_bak,
+        babyStepZoffsetDiff;
 } UI_CFG;
 
 typedef enum {
@@ -275,6 +282,7 @@ typedef enum {
   TEMP_UI,
   SET_UI,
   ZERO_UI,
+  BLTOUCH_UI,
   SPRAYER_UI,
   MACHINE_UI,
   LANGUAGE_UI,
@@ -541,6 +549,7 @@ lv_obj_t* lv_big_button_create(lv_obj_t *par, const char *img, const char *text,
 
 // Create a menu item, follow the LVGL UI standard.
 lv_obj_t* lv_screen_menu_item(lv_obj_t *par, const char *text, lv_coord_t x, lv_coord_t y, lv_event_cb_t cb, const int id, const int index, bool drawArrow = true);
+lv_obj_t* lv_screen_menu_item_w(lv_obj_t *par, const char *text, lv_coord_t x, lv_coord_t y, lv_event_cb_t cb, const int id, const int index, bool drawArrow = true);
 lv_obj_t* lv_screen_menu_item_1_edit(lv_obj_t *par, const char *text, lv_coord_t x, lv_coord_t y, lv_event_cb_t cb, const int id, const int index, const char *editValue);
 lv_obj_t* lv_screen_menu_item_2_edit(lv_obj_t *par, const char *text, lv_coord_t x, lv_coord_t y, lv_event_cb_t cb, const int id, const int index, const char *editValue, const int idEdit2, const char *editValue2);
 lv_obj_t* lv_screen_menu_item_onoff(lv_obj_t *par, const char *text, lv_coord_t x, lv_coord_t y, lv_event_cb_t cb, const int id, const int index, const bool curValue);

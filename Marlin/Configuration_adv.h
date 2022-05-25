@@ -1422,14 +1422,14 @@
 // #define POWER_LOSS_RECOVERY
 #if ENABLED(POWER_LOSS_RECOVERY)
 #define PLR_ENABLED_DEFAULT true // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
-//#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
-//#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
-//#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
-//#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
-//#define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
-//#define POWER_LOSS_PULLDOWN
-//#define POWER_LOSS_PURGE_LEN   20 // (mm) Length of filament to purge on resume
-//#define POWER_LOSS_RETRACT_LEN 10 // (mm) Length of filament to retract on fail. Requires backup power.
+                                 //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
+                                 //#define POWER_LOSS_ZRAISE       2 // (mm) Z axis raise on resume (on power loss with UPS)
+                                 //#define POWER_LOSS_PIN         44 // Pin to detect power loss. Set to -1 to disable default pin on boards without module.
+                                 //#define POWER_LOSS_STATE     HIGH // State of pin indicating power loss
+                                 //#define POWER_LOSS_PULLUP         // Set pullup / pulldown as appropriate for your sensor
+                                 //#define POWER_LOSS_PULLDOWN
+                                 //#define POWER_LOSS_PURGE_LEN   20 // (mm) Length of filament to purge on resume
+                                 //#define POWER_LOSS_RETRACT_LEN 10 // (mm) Length of filament to retract on fail. Requires backup power.
 
 // Without a POWER_LOSS_PIN the following option helps reduce wear on the SD card,
 // especially with "vase mode" printing. Set too high and vases cannot be continued.
@@ -1485,7 +1485,7 @@
 //#define UTF_FILENAME_SUPPORT
 
 // This allows hosts to request long names for files and folders with M33
-//#define LONG_FILENAME_HOST_SUPPORT
+#define LONG_FILENAME_HOST_SUPPORT
 
 // Enable this option to scroll long filenames in the SD card menu
 //#define SCROLL_LONG_FILENAMES
@@ -1882,7 +1882,7 @@
  * NOTE: This method is less reliable as it can only catch hangups while
  * interrupts are enabled.
  */
-#define USE_WATCHDOG
+// #define USE_WATCHDOG
 #if ENABLED(USE_WATCHDOG)
 //#define WATCHDOG_RESET_MANUAL
 #endif
@@ -2899,22 +2899,22 @@
  * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
  */
 #define CHOPPER_TIMING CHOPPER_DEFAULT_12V // All axes (override below)
-//#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
-//#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
-//#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
-//#define CHOPPER_TIMING_Y2 CHOPPER_TIMING_Y
-//#define CHOPPER_TIMING_Z  CHOPPER_TIMING        // For Z Axes (override below)
-//#define CHOPPER_TIMING_Z2 CHOPPER_TIMING_Z
-//#define CHOPPER_TIMING_Z3 CHOPPER_TIMING_Z
-//#define CHOPPER_TIMING_Z4 CHOPPER_TIMING_Z
-//#define CHOPPER_TIMING_E  CHOPPER_TIMING        // For Extruders (override below)
-//#define CHOPPER_TIMING_E1 CHOPPER_TIMING_E
-//#define CHOPPER_TIMING_E2 CHOPPER_TIMING_E
-//#define CHOPPER_TIMING_E3 CHOPPER_TIMING_E
-//#define CHOPPER_TIMING_E4 CHOPPER_TIMING_E
-//#define CHOPPER_TIMING_E5 CHOPPER_TIMING_E
-//#define CHOPPER_TIMING_E6 CHOPPER_TIMING_E
-//#define CHOPPER_TIMING_E7 CHOPPER_TIMING_E
+                                           //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
+                                           //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
+                                           //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
+                                           //#define CHOPPER_TIMING_Y2 CHOPPER_TIMING_Y
+                                           //#define CHOPPER_TIMING_Z  CHOPPER_TIMING        // For Z Axes (override below)
+                                           //#define CHOPPER_TIMING_Z2 CHOPPER_TIMING_Z
+                                           //#define CHOPPER_TIMING_Z3 CHOPPER_TIMING_Z
+                                           //#define CHOPPER_TIMING_Z4 CHOPPER_TIMING_Z
+                                           //#define CHOPPER_TIMING_E  CHOPPER_TIMING        // For Extruders (override below)
+                                           //#define CHOPPER_TIMING_E1 CHOPPER_TIMING_E
+                                           //#define CHOPPER_TIMING_E2 CHOPPER_TIMING_E
+                                           //#define CHOPPER_TIMING_E3 CHOPPER_TIMING_E
+                                           //#define CHOPPER_TIMING_E4 CHOPPER_TIMING_E
+                                           //#define CHOPPER_TIMING_E5 CHOPPER_TIMING_E
+                                           //#define CHOPPER_TIMING_E6 CHOPPER_TIMING_E
+                                           //#define CHOPPER_TIMING_E7 CHOPPER_TIMING_E
 
 /**
  * Monitor Trinamic drivers

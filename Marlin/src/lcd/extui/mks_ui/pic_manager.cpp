@@ -215,7 +215,10 @@ static const char assets[][LONG_FILENAME_LENGTH] = {
   "bmp_custom4.bin",
   "bmp_custom5.bin",
   "bmp_custom6.bin",
-  "bmp_custom7.bin"
+  "bmp_custom7.bin",
+
+  // bltouch settings screen
+  "bmp_init_state.bin",
 };
 
 #if HAS_SPI_FLASH_FONT
@@ -504,6 +507,7 @@ uint32_t Pic_Info_Write(uint8_t *P_name, uint32_t P_size) {
       disp_assets_update_progress("Reading files...");
       dir_t d;
       while (dir.readDir(&d, card.longFilename) > 0) {
+        
         // If we don't get a long name, but gets a short one, try it
         if (card.longFilename[0] == 0 && d.name[0] != 0)
           dosName2LongName((const char*)d.name, card.longFilename);
